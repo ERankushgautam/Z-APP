@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 
 require("dotenv").config();
@@ -16,6 +15,7 @@ app.get("/", (req, res) => {
   res.send("hello server");
 });
 
+// signup API
 app.post("/signup", async (req, res) => {
   let user = new User(req.body);
   let result = await user.save();
