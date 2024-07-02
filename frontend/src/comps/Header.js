@@ -8,14 +8,17 @@ function Header() {
   return (
     <div>
       <ul>
-        <li>
+        {/* <li>
           <Link to="/signup">signup</Link>
         </li>
         <li>
           <Link to="/login">login</Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/">home</Link>
+        </li>
+        <li>
+          <Link to="/profile">profile</Link>
         </li>
         <li>
           <Link onClick={logout} to="/signup">

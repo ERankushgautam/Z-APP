@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [error, setError] = useState("");
 
   const API_URL = process.env.REACT_APP_API_URL;
   useEffect(() => {
@@ -15,16 +16,26 @@ function Login() {
   }, [navigate]);
 
   const login = async () => {
-    const responce = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    let result = await responce.json();
-    localStorage.setItem("user", JSON.stringify(result));
-    navigate("/");
-    console.log(result);
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return;
+    } else {
+      const responce = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      let result = await responce.json();
+      if (result) {
+        console.log("Login successful");
+        localStorage.setItem("user", JSON.stringify(result.user));
+        navigate("/");
+      } else {
+        alert(result.error);
+      }
+    }
   };
+
   return (
     <div className="login">
       <div className="form">
@@ -45,6 +56,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={login}>Submit</button>
+        <p>{error}</p>
       </div>
       <h1>
         <Link to="/signup">signup</Link>

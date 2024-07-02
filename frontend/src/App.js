@@ -12,6 +12,7 @@ import Home from "./comps/Home";
 
 import Signup from "./comps/Signup";
 import Login from "./comps/Login";
+import Profile from "./comps/Profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateComp />}>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Route>
       <Route path="/signup" element={<Signup />} />
