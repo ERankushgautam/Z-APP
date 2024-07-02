@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -52,7 +52,7 @@ function Signup() {
           placeholder="Enter Email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label for="m">
+        <label htmlFor="m">
           <input
             type="radio"
             name="gender"
@@ -63,7 +63,7 @@ function Signup() {
           />
           male
         </label>
-        <label for="f">
+        <label htmlFor="f">
           <input
             type="radio"
             name="gender"
@@ -85,6 +85,9 @@ function Signup() {
         />
         <button onClick={collectUserDetail}>Submit</button>
       </div>
+      <h1>
+        <Link to="/login">login</Link>
+      </h1>
     </div>
   );
 }

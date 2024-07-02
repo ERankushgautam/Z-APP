@@ -6,10 +6,12 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import Signup from "./comps/Signup";
+import PrivateComp from "./comps/PrivateComp";
 import Layout from "./comps/Layout";
 import Home from "./comps/Home";
-import PrivateComp from "./comps/PrivateComp";
+
+import Signup from "./comps/Signup";
+import Login from "./comps/Login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +22,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
       <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
     </>
   )
 );

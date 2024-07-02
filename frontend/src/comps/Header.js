@@ -12,6 +12,9 @@ function Header() {
           <Link to="/signup">signup</Link>
         </li>
         <li>
+          <Link to="/login">login</Link>
+        </li>
+        <li>
           <Link to="/">home</Link>
         </li>
         <li>
