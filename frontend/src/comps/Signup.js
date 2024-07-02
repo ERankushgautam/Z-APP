@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState();
+  const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
 
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  }, [navigate]);
   const collectUserDetail = async () => {
     const user = { name, email, password, gender };
     console.log(name, password, email, gender);
@@ -20,6 +28,7 @@ function Signup() {
     });
     const result = await responce.json();
     localStorage.setItem("user", JSON.stringify(result));
+    navigate("/");
     console.log(result);
   };
 
