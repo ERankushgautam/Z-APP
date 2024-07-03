@@ -8,6 +8,7 @@ function Login() {
   const [error, setError] = useState("");
 
   const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const auth = localStorage.getItem("user");
     if (auth) {
@@ -28,7 +29,7 @@ function Login() {
       let result = await responce.json();
       if (result) {
         console.log("Login successful");
-        localStorage.setItem("user", JSON.stringify(result.user));
+        localStorage.setItem("user", JSON.stringify(result));
         navigate("/");
       } else {
         alert(result.error);
