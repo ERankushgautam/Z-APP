@@ -6,7 +6,7 @@ function Header() {
     localStorage.clear();
   };
   return (
-    <div>
+    <div className="header">
       <ul>
         <li>
           <Link to="/signup">signup</Link>
@@ -16,6 +16,9 @@ function Header() {
         </li>
         <li>
           <Link to="/">home</Link>
+        </li>
+        <li>
+          <Link to="/">hutt</Link>
         </li>
         <li>
           <Link onClick={logout} to="/signup">
