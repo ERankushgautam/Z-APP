@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 require("./db/config");
 const User = require("./db/User");
+const Post = require("./db/Post");
 
 const port = process.env.PORT;
 const app = express();
@@ -17,7 +18,7 @@ app.get("/", (req, res) => {
 
 // signup API
 app.post("/signup", async (req, res) => {
-  let user = new User(req.body);
+  const user = new User(req.body);
   let result = await user.save();
   result = result.toObject();
   res.send(result);
@@ -37,6 +38,20 @@ app.post("/login", async (req, res) => {
   } else {
     res.send({ error: "error" });
   }
+});
+
+// post API for POSTS
+app.post("/post", async (req, res) => {
+  const post = new Post(req.body);
+  let result = await post.save();
+  result = result.toObject();
+  res.send(result);
+});
+
+// post display API
+app.get("/post", async (req, res) => {
+  const post = await Post.find();
+  res.send(post);
 });
 
 app.listen(port, () => {

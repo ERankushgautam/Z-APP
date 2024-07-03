@@ -9,13 +9,10 @@ function Header() {
     <div className="header">
       <ul>
         <li>
-          <Link to="/signup">signup</Link>
-        </li>
-        <li>
-          <Link to="/login">login</Link>
-        </li>
-        <li>
           <Link to="/">home</Link>
+        </li>
+        <li>
+          <Link to="/profile">profile</Link>
         </li>
         <li>
           <Link to="/">hutt</Link>
