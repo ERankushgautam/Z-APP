@@ -9,14 +9,14 @@ function Header() {
     <div className="header">
       <ul>
         <li>
-          <Link to="/">home</Link>
+          <Link to="/">HOME</Link>
         </li>
         <li>
-          <Link to="/profile">profile</Link>
+          <Link to="/profile">PROFILE</Link>
         </li>
         <li>
           <Link onClick={logout} to="/login">
-            logout
+            LOG OUT
           </Link>
         </li>
       </ul>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Logo from "./Logo";
 
 function Home() {
   const [posts, setPosts] = useState([]);
