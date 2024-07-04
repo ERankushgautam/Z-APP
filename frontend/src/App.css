@@ -115,3 +115,41 @@ a {
   width: 100%;
   min-height: 100vh;
 }
+/* POST CARD */
+.post {
+  background-color: rgba(195, 195, 195, 0.41);
+  min-width: 40%;
+  min-height: 20vh;
+  margin: 1vh 20%;
+  border: 2px solid rgb(160, 160, 160);
+  border-radius: 7px;
+  padding: 2vh 1vw;
+}
+.user-area {
+  background-color: #fff;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 7px;
+  padding: 0.5vh 2vw;
+  text-transform: uppercase;
+}
+.content {
+  padding: 2vh 3vw;
+  min-height: 10vh;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #fff;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 7px;
+  padding: 2vh 1vw;
+}
+.action button {
+  width: 40%;
+  padding: 1vh 1vw;
+  border-radius: 10px;
+  border: 2px solid rgb(173, 173, 173);
+}

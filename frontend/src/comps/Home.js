@@ -19,10 +19,18 @@ function Home() {
   return (
     <div className="home">
       {posts.map((item) => (
-        <div key={item._id}>
-          <h1>{item.userName}</h1>
-          <h3>{item.userID}</h3>
-          <p>{item.content}</p>
+        <div key={item._id} className="post">
+          <div className="user-area">
+            <h1>{item.userName}</h1>
+            <p>{item.userID}</p>
+          </div>
+          <div className="content">
+            <p>{item.content}</p>
+          </div>
+          <div className="action">
+            <button>LIKE</button>
+            <button>COMMENT</button>
+          </div>
         </div>
       ))}
     </div>
