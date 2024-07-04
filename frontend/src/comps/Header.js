@@ -15,9 +15,6 @@ function Header() {
           <Link to="/profile">profile</Link>
         </li>
         <li>
-          <Link to="/">hutt</Link>
-        </li>
-        <li>
           <Link onClick={logout} to="/signup">
             logout
           </Link>
