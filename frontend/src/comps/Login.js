@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Logo from "./Logo";
+import Footer from "./Footer";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,7 +20,8 @@ function Login() {
 
   const login = async () => {
     if (!email || !password) {
-      setError("Please enter both email and password.");
+      setError("**Detail Missing!!**");
+      console.log("**Detail Missing!!**");
       return;
     } else {
       const responce = await fetch(`${API_URL}/login`, {
@@ -27,19 +30,27 @@ function Login() {
         body: JSON.stringify({ email, password }),
       });
       let result = await responce.json();
-      if (result) {
+      console.log(result);
+
+      if (result.user) {
         console.log("Login successful");
         localStorage.setItem("user", JSON.stringify(result));
         navigate("/");
       } else {
-        alert(result.error);
+        console.log("**Wrong Password or Email**");
+        setError("**Wrong Password or Email**");
+        setEmail("");
+        setPassword("");
       }
     }
   };
 
   return (
     <div className="login">
+      <Logo />
       <div className="form">
+        <p>Log in to Z APP</p>
+        <span>{error}</span>
         <input
           required
           type="email"
@@ -56,12 +67,12 @@ function Login() {
           placeholder="Enter password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={login}>Submit</button>
-        <p>{error}</p>
+        <button onClick={login}>Log In</button>
+        <p>
+          <Link to="/signup">Create New account !</Link>
+        </p>
       </div>
-      <h1>
-        <Link to="/signup">signup</Link>
-      </h1>
+      <Footer />
     </div>
   );
 }

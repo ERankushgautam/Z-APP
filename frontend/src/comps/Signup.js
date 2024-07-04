@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Logo from "./Logo";
+import Footer from "./Footer";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [gender, setGender] = useState();
+  const [gender, setGender] = useState("Not Sure");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -16,8 +19,14 @@ function Signup() {
       navigate("/");
     }
   }, [navigate]);
+
   const collectUserDetail = async () => {
     const user = { name, email, password, gender };
+    if (!name || !email || !password) {
+      setError("**Details Missing!!**");
+      console.log("**Details Missing!!**");
+      return;
+    }
     console.log(name, password, email, gender);
     const responce = await fetch(`${API_URL}/signup`, {
       method: "POST",
@@ -34,7 +43,10 @@ function Signup() {
 
   return (
     <div className="signup">
+      <Logo />
       <div className="form">
+        <p>Create new Account</p>
+        <span>{error}</span>
         <input
           required
           value={name}
@@ -52,28 +64,30 @@ function Signup() {
           placeholder="Enter Email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="m">
-          <input
-            type="radio"
-            name="gender"
-            id="m"
-            value="male"
-            checked={gender === "male"}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          male
-        </label>
-        <label htmlFor="f">
-          <input
-            type="radio"
-            name="gender"
-            id="f"
-            value="female"
-            checked={gender === "female"}
-            onChange={(e) => setGender(e.target.value)}
-          />
-          female
-        </label>
+        <div className="gender">
+          <label htmlFor="m">
+            <input
+              type="radio"
+              name="gender"
+              id="m"
+              value="male"
+              checked={gender === "male"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Male
+          </label>
+          <label htmlFor="f">
+            <input
+              type="radio"
+              name="gender"
+              id="f"
+              value="female"
+              checked={gender === "female"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Female
+          </label>
+        </div>
 
         <input
           required
@@ -83,11 +97,12 @@ function Signup() {
           placeholder="Enter password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={collectUserDetail}>Submit</button>
+        <button onClick={collectUserDetail}>Sign Up</button>
+        <p>
+          <Link to="/login">Already have an account ?</Link>
+        </p>
       </div>
-      <h1>
-        <Link to="/login">login</Link>
-      </h1>
+      <Footer />
     </div>
   );
 }
