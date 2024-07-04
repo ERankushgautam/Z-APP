@@ -18,10 +18,14 @@ app.get("/", (req, res) => {
 
 // signup API
 app.post("/signup", async (req, res) => {
-  const user = new User(req.body);
-  let result = await user.save();
-  result = result.toObject();
-  res.send(result);
+  try {
+    const user = new User(req.body);
+    let result = await user.save();
+    result = result.toObject();
+    res.send(result);
+  } catch (error) {
+    res.send({ error: "fill all details" });
+  }
 });
 
 // login API
@@ -29,7 +33,7 @@ app.post("/login", async (req, res) => {
   if (req.body.password && req.body.email) {
     let user = await User.findOne(req.body).select("-password");
     if (user) {
-      res.send(user);
+      res.send({ user });
     } else {
       res.send({ error: "no user with these details" });
     }
