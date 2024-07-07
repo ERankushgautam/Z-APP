@@ -2,6 +2,7 @@ import React from "react";
 
 function Profile() {
   const auth = localStorage.getItem("user");
+  console.log(auth);
   return (
     <div className="profile">
       <div className="details">

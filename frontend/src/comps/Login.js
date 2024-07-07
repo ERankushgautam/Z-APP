@@ -34,8 +34,9 @@ function Login() {
 
       if (result.user) {
         console.log("Login successful");
-        localStorage.setItem("user", JSON.stringify(result));
+        localStorage.setItem("user", JSON.stringify(result.user));
         navigate("/");
+        console.log(result);
       } else {
         console.log("**Wrong Password or Email**");
         setError("**Wrong Password or Email**");
