@@ -5,7 +5,7 @@ function Home() {
 
   const API_URL = process.env.REACT_APP_API_URL;
   const auth = localStorage.getItem("user");
-  const userID = JSON.parse(auth)._id;
+  const userID = JSON.parse(auth).username;
 
   const handlePosts = async () => {
     const responce = await fetch(`${API_URL}/post`);
@@ -24,7 +24,7 @@ function Home() {
       body: JSON.stringify({ _id, userID }),
     });
     const result = await response.json();
-    console.log("clicked");
+    console.log("clicked", result);
 
     // Update the like count for the specific post
     setPosts((prevPosts) =>
@@ -43,8 +43,8 @@ function Home() {
       {posts.map((item) => (
         <div key={item._id} className="post">
           <div className="user-area">
-            <h1>{item.userName}</h1>
-            <p>{item.userID}</p>
+            <h1>{item.Name}</h1>
+            <p>@{item.username}</p>
           </div>
           <div className="content">
             <p>{item.content}</p>

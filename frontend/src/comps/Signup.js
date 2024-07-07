@@ -5,6 +5,7 @@ import Footer from "./Footer";
 
 function Signup() {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("Not Sure");
@@ -21,24 +22,34 @@ function Signup() {
   }, [navigate]);
 
   const collectUserDetail = async () => {
-    const user = { name, email, password, gender };
-    if (!name || !email || !password) {
+    const user = { name, email, password, gender, username };
+    if (!name || !email || !password || !username) {
       setError("**Details Missing!!**");
       console.log("**Details Missing!!**");
       return;
     }
-    console.log(name, password, email, gender);
-    const responce = await fetch(`${API_URL}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    const result = await responce.json();
-    localStorage.setItem("user", JSON.stringify(result));
-    navigate("/");
-    console.log(result);
+    console.log(name, password, email, gender, username);
+
+    try {
+      const response = await fetch(`${API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const result = await response.json();
+      if (result.error) {
+        setError(result.error);
+        return console.log(result.error);
+      }
+      localStorage.setItem("user", JSON.stringify(result));
+      navigate("/");
+      console.log(result);
+    } catch (result) {
+      console.error(result);
+      setError("**Signup Failed!! Please try again later.**");
+    }
   };
 
   return (
@@ -88,7 +99,14 @@ function Signup() {
             Female
           </label>
         </div>
-
+        <input
+          required
+          value={username}
+          id="username"
+          type="text"
+          placeholder="Enter Username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <input
           required
           value={password}

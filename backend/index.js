@@ -18,6 +18,10 @@ app.get("/", (req, res) => {
 
 // signup API
 app.post("/signup", async (req, res) => {
+  let existingUser = await User.findOne({ username: req.body.username });
+  if (existingUser) {
+    return res.send({ error: "UserName already in use" });
+  }
   try {
     const user = new User(req.body);
     let result = await user.save();
@@ -37,7 +41,7 @@ app.post("/login", async (req, res) => {
     } else {
       res.send({ error: "no user with these details" });
     }
-  } else if (!req.body.password || !req.body.email) {
+  } else if (!req.body.password || req.body.email) {
     res.send({ error: "give required detail" });
   } else {
     res.send({ error: "error" });
