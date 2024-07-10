@@ -1,4 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb+srv://zapphd:zapp123@clusterzapp.qfsiyms.mongodb.net/Users?retryWrites=true&w=majority&appName=ClusterZAPP"
-);
+require("dotenv").config();
+const dbURL = process.env.DB_URL;
+mongoose.connect(dbURL);
