@@ -115,6 +115,15 @@ a {
   width: 100%;
   min-height: 100vh;
 }
+.user-profile {
+  background-color: red;
+}
+/* POSTS */
+
+.posts {
+  width: 60%;
+}
+
 /* POST CARD */
 .post {
   background-color: rgba(195, 195, 195, 0.41);

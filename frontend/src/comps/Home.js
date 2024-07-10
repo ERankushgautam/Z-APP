@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [profileData, setProfileData] = useState(null);
+  const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
   const auth = localStorage.getItem("user");
   const userID = JSON.parse(auth).username;
 
   const handlePosts = async () => {
-    const responce = await fetch(`${API_URL}/post`);
-    const result = await responce.json();
-    setPosts(result.reverse());
-    console.log(result);
+    try {
+      const response = await fetch(`${API_URL}/post`);
+      const result = await response.json();
+      setPosts(result.slice(-50).reverse());
+      console.log(result);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
   };
 
   const handleLike = async (_id) => {
@@ -34,6 +41,10 @@ function Home() {
     );
   };
 
+  const userProfile = async (id) => {
+    navigate(`/user-profile/${id}`);
+  };
+
   useEffect(() => {
     handlePosts();
   }, []);
@@ -42,8 +53,8 @@ function Home() {
     <div className="home">
       {posts.map((item) => (
         <div key={item._id} className="post">
-          <div className="user-area">
-            <h1>{item.Name}</h1>
+          <div className="user-area" onClick={() => userProfile(item.userID)}>
+            <h1>{item.name}</h1>
             <p>@{item.username}</p>
           </div>
           <div className="content">
