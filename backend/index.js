@@ -58,8 +58,13 @@ app.post("/post", async (req, res) => {
 
 // post display API
 app.get("/post", async (req, res) => {
-  const post = await Post.find();
-  res.send(post);
+  try {
+    const posts = await Post.find();
+    res.send(posts);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).send({ error: "Error fetching posts" });
+  }
 });
 
 // LIKE API
@@ -81,6 +86,20 @@ app.put("/post-like", async (req, res) => {
     res.json({ likeCount: post.like.length });
   } catch (error) {
     console.log(error);
+  }
+});
+
+// USER PROFILE DATA API
+app.get("/profile/:id", async (req, res) => {
+  try {
+    const profile = await User.findById(req.params.id).select("-password");
+    if (profile) {
+      res.send(profile);
+    } else {
+      res.send({ error: "user not found" });
+    }
+  } catch (error) {
+    res.send({ error: "somthing went wrong" });
   }
 });
 
