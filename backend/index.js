@@ -50,10 +50,14 @@ app.post("/login", async (req, res) => {
 
 // post API for POSTS
 app.post("/post", async (req, res) => {
-  const post = new Post(req.body);
-  let result = await post.save();
-  result = result.toObject();
-  res.send(result);
+  try {
+    const post = new Post(req.body);
+    let result = await post.save();
+    result = result.toObject();
+    res.send(result);
+  } catch (error) {
+    res.send({ error: "somthing went wrong!!" });
+  }
 });
 
 // post display API
