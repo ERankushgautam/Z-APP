@@ -15,6 +15,9 @@ function Header() {
           <Link to="/profile">PROFILE</Link>
         </li>
         <li>
+          <Link to="/post">NEW POST</Link>
+        </li>
+        <li>
           <Link onClick={logout} to="/login">
             LOG OUT
           </Link>

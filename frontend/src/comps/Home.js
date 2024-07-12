@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [profileData, setProfileData] = useState(null);
   const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -42,7 +41,7 @@ function Home() {
   };
 
   const userProfile = async (id) => {
-    if (JSON.parse(auth)._id == id) {
+    if (JSON.parse(auth)._id === id) {
       navigate(`/profile`);
     } else {
       navigate(`/user-profile/${id}`);

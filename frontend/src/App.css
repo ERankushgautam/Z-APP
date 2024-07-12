@@ -162,3 +162,11 @@ a {
   border-radius: 10px;
   border: 2px solid rgb(173, 173, 173);
 }
+
+/* making new post */
+#caption {
+  margin: 2vh auto;
+  resize: vertical;
+  width: 90%;
+  max-height: 35vh;
+}
