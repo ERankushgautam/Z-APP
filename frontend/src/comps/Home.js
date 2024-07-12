@@ -42,7 +42,11 @@ function Home() {
   };
 
   const userProfile = async (id) => {
-    navigate(`/user-profile/${id}`);
+    if (JSON.parse(auth)._id == id) {
+      navigate(`/profile`);
+    } else {
+      navigate(`/user-profile/${id}`);
+    }
   };
 
   useEffect(() => {
