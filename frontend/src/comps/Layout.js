@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import Footer from "./Footer";
 import Logo from "./Logo";
 
 function Layout() {
@@ -12,7 +11,6 @@ function Layout() {
         <div className="feed-container">
           <Logo />
           <Outlet />
-          <Footer />
         </div>
       </div>
     </>

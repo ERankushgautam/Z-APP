@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 function Header() {
   const logout = () => {
@@ -23,6 +24,7 @@ function Header() {
           </Link>
         </li>
       </ul>
+      <Footer />
     </div>
   );
 }

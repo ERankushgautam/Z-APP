@@ -170,3 +170,21 @@ a {
   width: 90%;
   max-height: 35vh;
 }
+/* refresh button */
+.refresh {
+  position: fixed;
+  z-index: 999;
+  bottom: 7vh;
+  right: 4vw;
+}
+.refresh button {
+  height: 40px;
+  width: 40px;
+  background-color: rgb(13, 20, 32);
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.7rem;
+  padding: 3px;
+}

@@ -9,6 +9,10 @@ function Home() {
   const auth = localStorage.getItem("user");
   const userID = JSON.parse(auth).username;
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   const handlePosts = async () => {
     try {
       const response = await fetch(`${API_URL}/post`);
@@ -71,6 +75,9 @@ function Home() {
           </div>
         </div>
       ))}
+      <div className="refresh">
+        <button onClick={reloadPage}>R</button>
+      </div>
     </div>
   );
 }
