@@ -8,7 +8,6 @@
   text-align: center;
   color: rgb(255, 255, 255);
   font-size: 1.5rem;
-  background-color: #ff4040;
   background-color: rgb(13, 20, 32);
 }
 li {
@@ -95,7 +94,7 @@ a {
   background-color: rgb(13, 22, 32);
   width: 20%;
   height: 100vh;
-  padding: 13vh 0 0 0;
+  padding: 8vh 0 0 0;
   position: fixed;
   color: white;
 }
@@ -169,6 +168,25 @@ a {
   resize: vertical;
   width: 90%;
   max-height: 35vh;
+}
+.post-upload {
+  background-color: rgba(195, 195, 195, 0.41);
+  min-width: 40%;
+  min-height: 20vh;
+  margin: 1vh 20%;
+  border: 2px solid rgb(160, 160, 160);
+  border-radius: 7px;
+  padding: 2vh 1vw;
+}
+.post-upload .form {
+  width: 80%;
+  margin: 2vh auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(133, 133, 133, 0.714);
+  border-radius: 7px;
+  background-color: #fff;
+  box-shadow: 2px 2px 7px rgb(170, 170, 170);
 }
 /* refresh button */
 .refresh {

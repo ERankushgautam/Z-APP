@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import Logo from "./Logo";
 
 function Header() {
   const logout = () => {
@@ -8,6 +9,8 @@ function Header() {
   };
   return (
     <div className="header">
+      <Logo />
+
       <ul>
         <li>
           <Link to="/">HOME</Link>

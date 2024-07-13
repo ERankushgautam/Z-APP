@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
 
 function Post() {
@@ -26,8 +25,14 @@ function Post() {
           body: JSON.stringify(post),
         });
         const result = await responce.json();
+
         console.log(result);
+        setContent("");
         navigate("/");
+        alert("Post Uploaded...!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } catch (error) {
         console.log(error);
       }
@@ -35,9 +40,8 @@ function Post() {
   };
 
   return (
-    <div className="post">
-      <Logo />
-      <div className="form">
+    <div className="post-upload">
+      <div className="form ">
         <p>Create New Post</p>
         <textarea
           value={content}

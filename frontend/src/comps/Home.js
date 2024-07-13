@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Post from "./Post";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -17,7 +18,7 @@ function Home() {
     try {
       const response = await fetch(`${API_URL}/post`);
       const result = await response.json();
-      setPosts(result.slice(-50).reverse());
+      setPosts(result.reverse());
       console.log(result);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -58,6 +59,7 @@ function Home() {
 
   return (
     <div className="home">
+      <Post />
       {posts.map((item) => (
         <div key={item._id} className="post">
           <div className="user-area" onClick={() => userProfile(item.userID)}>
