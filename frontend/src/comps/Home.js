@@ -4,6 +4,8 @@ import Post from "./Post";
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikecount] = useState();
   const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -35,6 +37,7 @@ function Home() {
       body: JSON.stringify({ _id, userID }),
     });
     const result = await response.json();
+    setLiked(true);
     console.log("clicked", result);
 
     // Update the like count for the specific post
@@ -43,6 +46,36 @@ function Home() {
         post._id === _id ? { ...post, like: [...post.like, userID] } : post
       )
     );
+  };
+
+  const handleDislike = async (_id) => {
+    const responce = await fetch(`${API_URL}/post-dislike`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ _id, userID }),
+    });
+    const result = await responce.json();
+    setLiked(false);
+    console.log("clicked", result);
+
+    // Update the like count for the specific post
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === _id
+          ? { ...post, like: post.like.filter((id) => id !== userID) }
+          : post
+      )
+    );
+  };
+
+  const handleLikeORDislike = (_id) => {
+    if (!liked) {
+      handleLike(_id);
+    } else {
+      handleDislike(_id);
+    }
   };
 
   const userProfile = async (id) => {
@@ -70,7 +103,7 @@ function Home() {
             <p>{item.content}</p>
           </div>
           <div className="action">
-            <button onClick={() => handleLike(item._id)}>
+            <button onClick={() => handleLikeORDislike(item._id)}>
               {item.like.length} LIKES
             </button>
             <button>COMMENT</button>

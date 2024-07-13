@@ -86,8 +86,27 @@ app.put("/post-like", async (req, res) => {
       post.like.push(userID);
       await post.save();
     }
-    res.send({ success: "liked" });
-    res.json({ likeCount: post.like.length });
+    res.send({ success: "liked", likeCount: post.like.length });
+  } catch (error) {
+    console.log(error);
+  }
+});
+// remove LIKE API
+app.put("/post-dislike", async (req, res) => {
+  const { _id, userID } = req.body;
+  if (!_id || !userID) {
+    return res.send({ error: "Post ID and User ID are required" });
+  }
+  try {
+    const post = await Post.findById(_id);
+    if (!post) {
+      return res.status(404).send({ error: "Post not found" });
+    }
+    if (post.like.includes(userID)) {
+      post.like.pull(userID);
+      await post.save();
+    }
+    res.send({ success: "disliked", likeCount: post.like.length });
   } catch (error) {
     console.log(error);
   }
