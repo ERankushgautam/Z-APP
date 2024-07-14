@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import UserArea from "./UserArea";
 
 function Comments() {
   const { id } = useParams();
@@ -46,10 +47,11 @@ function Comments() {
   return (
     <div className="postdetails">
       <div className="post">
-        <div className="user-area">
-          <h1>{singlePost.name}</h1>
-          <p>@{singlePost.username}</p>
-        </div>
+        <UserArea
+          name={singlePost.name}
+          username={singlePost.username}
+          id={singlePost.userID}
+        />
         <div className="content">
           <p>{singlePost.content}</p>
           <p>{singlePost.like ? singlePost.like.length : 0} likes</p>

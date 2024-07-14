@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Post from "./Post";
+import UserArea from "./UserArea";
 
 function Home() {
   const [posts, setPosts] = useState([]);
   const [liked, setLiked] = useState(false);
   const navigate = useNavigate();
-
-  const API_URL = process.env.REACT_APP_API_URL;
   const auth = localStorage.getItem("user");
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const userID = JSON.parse(auth).username;
 
   const reloadPage = () => {
@@ -98,11 +99,13 @@ function Home() {
       <Post />
       {posts.map((item) => (
         <div key={item._id} className="post">
-          <div className="user-area" onClick={() => userProfile(item.userID)}>
-            <h1>{item.name}</h1>
-            <p>@{item.username}</p>
-          </div>
-          <div className="content">
+          <UserArea
+            name={item.name}
+            username={item.username}
+            id={item.userID}
+          />
+
+          <div className="content" onClick={() => handleComments(item._id)}>
             <p>{item.content}</p>
           </div>
           <div className="action">
