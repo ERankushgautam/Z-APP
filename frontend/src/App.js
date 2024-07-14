@@ -15,6 +15,7 @@ import Login from "./comps/Login";
 import Profile from "./comps/Profile";
 import UserProfile from "./comps/UserProfile";
 import Post from "./comps/Post";
+import Comments from "./comps/Comments";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
           <Route path="/profile" element={<Profile />} />
           <Route path="/post" element={<Post />} />
           <Route path="/user-profile/:id" element={<UserProfile />} />
+          <Route path="/comments/:id" element={<Comments />} />
         </Route>
       </Route>
       <Route path="/signup" element={<Signup />} />

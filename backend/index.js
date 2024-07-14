@@ -126,6 +126,44 @@ app.get("/profile/:id", async (req, res) => {
   }
 });
 
+// comments API
+app.put("/comment/:id", async (req, res) => {
+  const { id } = req.params;
+  const { username, content } = req.body;
+
+  if (!username || !content) {
+    return res.status(400).send({ error: "Username and content are required" });
+  }
+
+  try {
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).send({ error: "Post not found" });
+    }
+    const newComment = { username, content };
+    post.comments.push(newComment);
+    await post.save();
+
+    res.send({ success: "Comment added", comments: post.comments });
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+});
+
+app.get("/comment/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (post) {
+      res.status(200).send(post);
+    } else {
+      res.status(404).send({ error: "Post not found" });
+    }
+  } catch (error) {
+    res.status(500).send({ error: "Something went wrong" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

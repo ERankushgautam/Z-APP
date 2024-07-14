@@ -5,7 +5,6 @@ import Post from "./Post";
 function Home() {
   const [posts, setPosts] = useState([]);
   const [liked, setLiked] = useState(false);
-  const [likeCount, setLikecount] = useState();
   const navigate = useNavigate();
 
   const API_URL = process.env.REACT_APP_API_URL;
@@ -86,6 +85,10 @@ function Home() {
     }
   };
 
+  const handleComments = (id) => {
+    navigate(`/comments/${id}`);
+  };
+
   useEffect(() => {
     handlePosts();
   }, []);
@@ -106,7 +109,7 @@ function Home() {
             <button onClick={() => handleLikeORDislike(item._id)}>
               {item.like.length} LIKES
             </button>
-            <button>COMMENT</button>
+            <button onClick={() => handleComments(item._id)}>COMMENT</button>
           </div>
         </div>
       ))}
