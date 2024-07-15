@@ -78,14 +78,6 @@ function Home() {
     }
   };
 
-  const userProfile = async (id) => {
-    if (JSON.parse(auth)._id === id) {
-      navigate(`/profile`);
-    } else {
-      navigate(`/user-profile/${id}`);
-    }
-  };
-
   const handleComments = (id) => {
     navigate(`/comments/${id}`);
   };
