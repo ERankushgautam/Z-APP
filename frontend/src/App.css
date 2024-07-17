@@ -134,11 +134,16 @@ a {
   padding: 2vh 1vw;
 }
 .user-area {
+  display: flex;
+  justify-content: space-between;
   background-color: #fff;
   border: 1px solid rgb(160, 160, 160);
   border-radius: 7px;
   padding: 0.5vh 2vw;
   text-transform: uppercase;
+}
+.user-area b {
+  text-align: center;
 }
 .content {
   padding: 2vh 3vw;
