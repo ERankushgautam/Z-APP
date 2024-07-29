@@ -12,9 +12,7 @@ function UserArea(props) {
       navigate(`/user-profile/${id}`);
     }
   };
-  const options = () => {
-    console.log("options");
-  };
+
   return (
     <div className="user-area">
       <div
@@ -25,9 +23,6 @@ function UserArea(props) {
       >
         <h1>{props.name}</h1>
         <p>@{props.username}</p>
-      </div>
-      <div onClick={options} className="b">
-        II
       </div>
     </div>
   );

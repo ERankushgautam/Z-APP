@@ -5,7 +5,7 @@ const commentSchema = new Schema({
   content: { type: String, required: true },
 });
 const postSchema = new Schema({
-  userID: { type: String, required: true },
+  userID: { type: String, required: true, ref: "User" },
   content: { type: String, required: true },
   name: { type: String, required: true },
   username: { type: String, required: true },

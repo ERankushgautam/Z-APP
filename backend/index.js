@@ -71,6 +71,23 @@ app.get("/post", async (req, res) => {
   }
 });
 
+// display POSTS for one user
+app.get("/post/user/:userID", async (req, res) => {
+  const { userID } = req.params;
+
+  try {
+    const posts = await Post.find({ userID });
+
+    if (posts.length === 0) {
+      return res.status(404).json({ error: "No posts found for this user" });
+    }
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).send({ error: "Internal server error" });
+  }
+});
+
 // LIKE API
 app.put("/post-like", async (req, res) => {
   const { _id, userID } = req.body;

@@ -1,87 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Post from "./Post";
-import UserArea from "./UserArea";
+import PostLayout from "./PostLayout"; // Import the PostLayout component
 
 function Home() {
-  const [posts, setPosts] = useState([]);
-  const [liked, setLiked] = useState(false);
-  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]); // State to store posts
+  const navigate = useNavigate(); // Hook for navigation
   const auth = localStorage.getItem("user");
-  const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = process.env.REACT_APP_API_URL; // API URL from environment variables
 
-  const userID = JSON.parse(auth).username;
+  // Extract userID from local storage
+  const userID = JSON.parse(auth)?.username;
 
+  // Function to reload the page (for demonstration purposes)
   const reloadPage = () => {
     window.location.reload();
   };
 
+  // Fetch posts from the server
   const handlePosts = async () => {
     try {
       const response = await fetch(`${API_URL}/post`);
       const result = await response.json();
-      setPosts(result.reverse());
+      setPosts(result.reverse()); // Reverse posts to display the latest first
       console.log(result);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   };
 
-  const handleLike = async (_id) => {
-    console.log(_id);
-    const response = await fetch(`${API_URL}/post-like`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ _id, userID }),
-    });
-    const result = await response.json();
-    setLiked(true);
-    console.log("clicked", result);
-
-    // Update the like count for the specific post
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post._id === _id ? { ...post, like: [...post.like, userID] } : post
-      )
-    );
-  };
-
-  const handleDislike = async (_id) => {
-    const responce = await fetch(`${API_URL}/post-dislike`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ _id, userID }),
-    });
-    const result = await responce.json();
-    setLiked(false);
-    console.log("clicked", result);
-
-    // Update the like count for the specific post
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post._id === _id
-          ? { ...post, like: post.like.filter((id) => id !== userID) }
-          : post
-      )
-    );
-  };
-
-  const handleLikeORDislike = (_id) => {
-    if (!liked) {
-      handleLike(_id);
-    } else {
-      handleDislike(_id);
-    }
-  };
-
-  const handleComments = (id) => {
-    navigate(`/comments/${id}`);
-  };
-
+  // Fetch posts on component mount
   useEffect(() => {
     handlePosts();
   }, []);
@@ -90,23 +38,13 @@ function Home() {
     <div className="home">
       <Post />
       {posts.map((item) => (
-        <div key={item._id} className="post">
-          <UserArea
-            name={item.name}
-            username={item.username}
-            id={item.userID}
-          />
-
-          <div className="content" onClick={() => handleComments(item._id)}>
-            <p>{item.content}</p>
-          </div>
-          <div className="action">
-            <button onClick={() => handleLikeORDislike(item._id)}>
-              {item.like.length} LIKES
-            </button>
-            <button onClick={() => handleComments(item._id)}>COMMENT</button>
-          </div>
-        </div>
+        <PostLayout
+          key={item._id} // Unique key for React
+          post={item} // Pass the entire post object
+          userID={userID} // Pass userID
+          API_URL={API_URL} // Pass API URL for handling like/dislike actions
+          navigate={navigate} // Pass navigate function for routing
+        />
       ))}
       <div className="refresh">
         <button onClick={reloadPage}>R</button>
