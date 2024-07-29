@@ -164,6 +164,16 @@ app.get("/comment/:id", async (req, res) => {
   }
 });
 
+// Delete post API
+app.delete("/post/:id", async (req, res) => {
+  try {
+    const result = await Post.deleteOne({ _id: req.params.id });
+    res.send(result);
+  } catch (error) {
+    res.send({ error: error });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
