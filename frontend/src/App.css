@@ -220,17 +220,16 @@ a {
 }
 
 /* profile page */
-.profile{
-  
-    background-color: rgba(133, 133, 133, 0.714);
-    color: rgb(0, 0, 0);
-    padding: 40px;
-    margin: 40px;
-    height: 25%;
-    text-align: right;
-    position: relative;
-    border: 2px solid rgb(95, 40, 40);
-    border-radius: 10px;
+.profile {
+  background-color: rgba(133, 133, 133, 0.714);
+  color: rgb(0, 0, 0);
+  padding: 40px;
+  margin: 40px;
+  height: 25%;
+
+  position: relative;
+  border: 2px solid rgb(95, 40, 40);
+  border-radius: 10px;
 }
 
 .details {
@@ -271,5 +270,3 @@ a {
 .data a:hover {
   text-decoration: underline;
 }
-
-
